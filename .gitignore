@@ -1,0 +1,5 @@
+# ignore node_modules, dist dirs, package-lock.json and .env files
+**/node_modules
+**/dist
+**/package-lock.json
+**/.env

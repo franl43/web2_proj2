@@ -1,0 +1,14 @@
+extends layout.pug
+block content
+    div.user-info
+        h3 Vaše informacije 
+        ul
+            li= 'ID: ' + userInfo.id
+            li= 'Korisničko ime: ' + userInfo.username
+            li= 'Zanimanje: ' + userInfo.profession
+            li= 'Uloga: ' + userInfo.role
+        div#logout
+            a(href="/logout") Logout
+        div.broken-auth-desc
+            p Ako je ranjivost uključena kolačići će se ispisati. Ako je ranjivost isključena kolačićima se neće moći pristupiti i ispis će biti prazan.
+            button#show-cookies(title="Show cookies") Prikaži cookies

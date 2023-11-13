@@ -1,0 +1,36 @@
+extends layout.pug
+block content
+    div.title
+        h1 Loša autentifikacija (Broken Authentication)
+    div.desc
+        p.desc-text Ovdje možete isprobati ranjivosti loše autentifikacije. Neka od korisničkih imena su #[span.query admin] #[span.query peroPeric] #[span.query ivo123].#[br]Lozinka za sve račune je #[span.query password].
+        p.desc-list-title Implemetirani dijelovi su: 
+        ul.desc-list 
+            li Brute force napadi
+                ul 
+                    li Prijava se može pokušavati koliko puta želi
+                    li ZAŠTITA: Nakon 3 pogrešna pokušaja prijave račun se privremeno blokira na 5 minuta
+            li Loše poruke o greškama
+                ul 
+                    li Ispisuje se poruka o tome je li pogrešno korisničko ime ili loinka
+                    li ZAŠTITA: Ispisuje se genirička poruka o pogrešci
+            li Zastavica HTTPOnly
+                ul 
+                    li Kolačiću se može pristupiti iz Javascript-a
+                    li ZAŠTITA: Postaviti zastavicu HTTPOnly za kolačić u kojem se čuvaju podaci o sjednici
+
+    div.form
+        form(method="post" action="/broken-auth")
+            div.form-enable
+                input#broken-auth-enable(type="checkbox", name="brokenAuthEnabled", checked=checked)
+                label(for="broken-auth-enable")
+            div.form-fields
+                label(for="username") Korisničko ime
+                input(type="text" id="username", name="username", required)
+                label(for="password") Lozinka
+                input(type="password" id="password", name="password", required)
+                input(type="submit", value="Prijava")
+    if err 
+        div.err
+            h3.err #{err}
+    

@@ -1,0 +1,33 @@
+extends layout.pug
+block content 
+    div.title
+        h1 SQL Umetanje (SQL Injection)
+    div.querys
+        p.query-title Za tautologiju u polje upišite:
+            span.query null OR 1=1
+            button.copy(title='Copy to clipboard') Kopiraj
+        p.query-desc Ovim SQL Umetanjem izlistat će se svi korisnici iz baze podataka.
+        p.query-title Za UNION upit u polje upišite:
+            span.query null UNION SELECT null, null, null, password FROM users
+            button.copy(title='Copy to clipboard') Kopiraj
+        p.query-desc Ovim SQL Umetanjem na mjestu gdje bi se trebala ispisati uloga ispisat će se hash lozinke korisnika.
+    div.form
+        form(method="post" action="/view-user")
+            div.form-enable
+                input#sqli-enable(type="checkbox", name="sqliEnabled" checked=checked)
+                label(for="sqli-enbale")
+            div.form-fields
+                label(for="userid") Unesite ID korisnika čije podatke želite vidjeti
+                input(type="text" id="userid", name="userid", required)
+                input(type="submit", value="Pogledaj")
+    if err 
+        div.err
+            h3.err #{err}
+    if userInfo 
+        each info in userInfo
+            div.user-info
+                h3= 'Korisnik ' + info.id 
+                ul
+                    li= 'Korisničko ime: ' + info.username
+                    li= 'Zanimanje: ' + info.profession
+                    li= 'Uloga: ' + info.role
