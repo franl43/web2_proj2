@@ -169,7 +169,7 @@ app.post('/broken-auth', function(req, res) {
                             if(success) {
                                 unlockUser(ul.id, null)
                                     .then(p => {
-                                        req.session.cookie.secure = true
+                                        req.session.cookie.secure = false
                                         req.session.cookie.httpOnly = true
                                         req.session.userInfo = {
                                             id: ul.id,
